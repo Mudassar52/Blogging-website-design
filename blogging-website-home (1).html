@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Blog | Home</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #5928E5;
+            --secondary: #F0F3FF;
+            --text-primary: #1A1A2E;
+            --text-secondary: #4A4A68;
+            --accent: #FF6B6B;
+            --bg-light: #FFFFFF;
+            --bg-dark: #F8FAFC;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        .header-scrolled {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.7rem 5%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-circle {
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .search-btn, .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .search-btn:hover, .menu-btn:hover {
+            color: var(--primary);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 5rem;
+            padding: 8rem 5% 5rem;
+            background-color: var(--secondary);
+            border-radius: 0 0 3rem 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 49%, rgba(89, 40, 229, 0.1) 50%, transparent 51%);
+            background-size: 20px 20px;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero-title span::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 8px;
+            bottom: 5px;
+            left: 0;
+            background-color: rgba(89, 40, 229, 0.2);
+            z-index: -1;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #4717D0;
+            border-color: #4717D0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(89, 40, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(89, 40, 229, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.5s ease;
+        }
+
+        .hero-img:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+
+        /* Featured Posts Section */
+        .featured-posts {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 25px;
+            background-color: var(--primary);
+            border-radius: 5px;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .view-all:hover {
+            gap: 0.8rem;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-category {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .post-card:hover .post-category {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .post-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .post-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .post-title a:hover {
+            color: var(--primary);
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 4rem 5%;
+            background-color: var(--bg-dark);
+            border-radius: 2rem;
+            margin: 2rem 5%;
+        }
+
+        .newsletter-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .newsletter-content {
+            flex: 1;
+        }
+
+        .newsletter-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .newsletter-form {
+            flex: 1;
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            background-color: white;
+            padding: 0.5rem;
+            border-radius: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .newsletter-input {
+            flex: 1;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            outline: none;
+            border-radius: 2rem;
+        }
+
+        .newsletter-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.8rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #4717D0;
+            box-shadow: 0 5px 15px rgba(89, 40, 229, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-primary);
+            color: white;
+            padding: 4rem 5% 2rem;
+            border-radius: 3rem 3rem 0 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        .footer-column p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+
+        /* Animation Classes */
+        .animate-fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-description, .newsletter-description {
+                max-width: 100%;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                justify-content: center;
+                margin-top: 2rem;
+            }
+
+            .newsletter-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .newsletter-form {
+                margin: 0 auto;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .newsletter {
+                padding: 3rem 5%;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+        
+        
+        @media (max-width: 576px) {
+    .newsletter {
+        padding: 2rem 5%;
+        margin: 1.5rem 5%;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        padding: 0.5rem;
+    }
+    
+    .newsletter-input {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .newsletter-btn {
+        width: 100%;
+    }
+    
+    .newsletter-title {
+        font-size: 1.5rem;
+    }
+    
+    .newsletter-description {
+        font-size: 0.9rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-circle"></span>
+                Insight<span style="color: var(--accent);">Blog</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-buttons">
+                <button class="search-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <button class="menu-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-text animate-fade-up">
+                <h1 class="hero-title">Discover Insights That <span>Inspire</span> Your Journey</h1>
+                <p class="hero-description">Join our community of curious minds and passionate writers sharing knowledge, stories, and perspectives that matter. Explore curated content that sparks creativity and fuels growth.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        Start Reading
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#" class="btn btn-secondary">Become a Writer</a>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="hero-img" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Posts Section -->
+    <section class="featured-posts">
+        <div class="section-title">
+            <h2 class="animate-fade-up">Featured Posts</h2>
+            <a href="#" class="view-all animate-fade-up">
+                View All
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+        <div class="posts-grid">
+            <!-- Post Card 1 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Technology</span>
+                    <h3 class="post-title"><a href="#">The Future of AI: Beyond the Buzzwords and Into Reality</a></h3>
+                    <p class="post-excerpt">Exploring the actual impact of artificial intelligence on industries beyond the hype and looking at real-world applications transforming our daily lives.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Sarah Chen</span>
+                        </div>
+                        <span class="post-date">Mar 20, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post Card 2 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Productivity</span>
+                    <h3 class="post-title"><a href="#">Deep Work in a Distracted World: Finding Focus</a></h3>
+                    <p class="post-excerpt">Practical strategies for achieving focused work in an age of constant notifications, distractions, and information overload.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Mark Johnson</span>
+                        </div>
+                        <span class="post-date">Mar 18, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Post Card 3 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Creativity</span>
+                    <h3 class="post-title"><a href="#">The Creative Process: From Inspiration to Finished Work</a></h3>
+                    <p class="post-excerpt">Understanding the stages of creativity and learning how to navigate through blocks to bring your ideas to life effectively.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Elena Rivera</span>
+                        </div>
+                        <span class="post-date">Mar 15, 2025</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+<!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="newsletter-container">
+            <div class="newsletter-content animate-fade-up">
+                <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+                <p class="newsletter-description">Get weekly updates on the latest stories, posts and insights directly in your inbox. No spam, we promise.</p>
+            </div>
+            <form class="newsletter-form animate-fade-up">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="featured-posts">
+        <div class="section-title">
+            <h2 class="animate-fade-up">Popular Categories</h2>
+            <a href="#" class="view-all animate-fade-up">
+                All Categories
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+        <div class="posts-grid">
+            <!-- Category Card 1 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <h3 class="post-title"><a href="#">Technology</a></h3>
+                    <p class="post-excerpt">Explore the latest advancements in tech, AI, programming, and digital transformation.</p>
+                    <div class="post-meta">
+                        <span class="post-date">42 Articles</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category Card 2 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <h3 class="post-title"><a href="#">Productivity</a></h3>
+                    <p class="post-excerpt">Tools, methods, and systems to help you achieve more while maintaining balance.</p>
+                    <div class="post-meta">
+                        <span class="post-date">38 Articles</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Category Card 3 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <h3 class="post-title"><a href="#">Personal Growth</a></h3>
+                    <p class="post-excerpt">Stories and strategies for continuous self-improvement and meaningful development.</p>
+                    <div class="post-meta">
+                        <span class="post-date">29 Articles</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Recent Posts Section -->
+    <section class="featured-posts">
+        <div class="section-title">
+            <h2 class="animate-fade-up">Recent Posts</h2>
+            <a href="#" class="view-all animate-fade-up">
+                View All
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+        <div class="posts-grid">
+            <!-- Recent Post Card 1 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Health</span>
+                    <h3 class="post-title"><a href="#">Mindful Movement: The Connection Between Exercise and Mental Health</a></h3>
+                    <p class="post-excerpt">How different forms of physical activity can improve not just your body but also your mind and emotional wellbeing.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Alex Patel</span>
+                        </div>
+                        <span class="post-date">Mar 22, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Recent Post Card 2 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Finance</span>
+                    <h3 class="post-title"><a href="#">Financial Minimalism: Simplifying Your Approach to Money</a></h3>
+                    <p class="post-excerpt">Practical steps to declutter your financial life and focus on what truly matters for long-term security and happiness.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Taylor Kim</span>
+                        </div>
+                        <span class="post-date">Mar 21, 2025</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Recent Post Card 3 -->
+            <article class="post-card animate-fade-up">
+                <img src="/api/placeholder/400/320" alt="placeholder" class="post-image" />
+                <div class="post-content">
+                    <span class="post-category">Education</span>
+                    <h3 class="post-title"><a href="#">The Self-Taught Path: Learning Effectively Without Formal Structure</a></h3>
+                    <p class="post-excerpt">Strategies and resources for developing expertise in any field through self-directed learning in the digital age.</p>
+                    <div class="post-meta">
+                        <div class="post-author">
+                            <img src="/api/placeholder/30/30" alt="placeholder" class="author-avatar" />
+                            <span class="author-name">Jordan Lee</span>
+                        </div>
+                        <span class="post-date">Mar 19, 2025</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <a href="#" class="logo" style="color: white; margin-bottom: 1rem;">
+                    <span class="logo-circle"></span>
+                    Insight<span style="color: var(--accent);">Blog</span>
+                </a>
+                <p>A community of writers and readers dedicated to sharing meaningful insights and stories that inspire growth, creativity, and deeper understanding.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+    <rect x="2" y="9" width="4" height="12"></rect>
+    <circle cx="4" cy="4" r="2"></circle>
+</svg>
+</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Featured Posts</a></li>
+                    <li><a href="#">Categories</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Technology</a></li>
+                    <li><a href="#">Productivity</a></li>
+                    <li><a href="#">Creativity</a></li>
+                    <li><a href="#">Health</a></li>
+                    <li><a href="#">Finance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="footer-links">
+                    <li>
+                        <a href="mailto:info@insightblog.com">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            info@insightblog.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            San Francisco, CA
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">© 2025 InsightBlog. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+<!-- ہیڈر میں کوئی تبدیلی نہیں -->
+
+<!-- JavaScript میں تبدیلی -->
+<script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('header-scrolled');
+        } else {
+            header.classList.remove('header-scrolled');
+        }
+    });
+
+    // موبائل نیویگیشن ٹوگل
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+        const navMenu = document.querySelector('nav ul');
+        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        
+        // موبائل پر درست ڈسپلے کے لیے اسٹائل شامل کریں
+        if (navMenu.style.display === 'flex') {
+            navMenu.style.flexDirection = 'column';
+            navMenu.style.position = 'absolute';
+            navMenu.style.top = '100%';
+            navMenu.style.left = '0';
+            navMenu.style.width = '100%';
+            navMenu.style.backgroundColor = 'white';
+            navMenu.style.padding = '1rem';
+            navMenu.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+            navMenu.style.zIndex = '1000';
+        }
+    });
+
+    // Fade in animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const animatedElements = document.querySelectorAll('.animate-fade-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('appear');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+</body>
+</html>
