@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Categories | InsightBlog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary: #5928E5;
+            --secondary: #F0F3FF;
+            --text-primary: #1A1A2E;
+            --text-secondary: #4A4A68;
+            --accent: #FF6B6B;
+            --bg-light: #FFFFFF;
+            --bg-dark: #F8FAFC;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--secondary);
+            border-radius: 2rem;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(89, 40, 229, 0.1);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .category-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .article-count {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-header">
+            <h1>Explore Our Categories</h1>
+            <p>Find the topics that spark your curiosity and fuel your passion.</p>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search categories..." id="categorySearch">
+        </div>
+
+        <div class="categories-grid" id="categoriesGrid">
+            <div class="category-card" data-category="technology">
+                <img src="/api/placeholder/400/320" alt="Technology" class="category-image">
+                <div class="category-content">
+                    <h3 class="category-title">Technology</h3>
+                    <p class="category-description">Explore the latest advancements in tech, AI, programming, and digital transformation.</p>
+                    <div class="category-meta">
+                        <span class="article-count">42 Articles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="productivity">
+                <img src="/api/placeholder/400/320" alt="Productivity" class="category-image">
+                <div class="category-content">
+                    <h3 class="category-title">Productivity</h3>
+                    <p class="category-description">Tools, methods, and systems to help you achieve more while maintaining balance.</p>
+                    <div class="category-meta">
+                        <span class="article-count">38 Articles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="creativity">
+                <img src="/api/placeholder/400/320" alt="Creativity" class="category-image">
+                <div class="category-content">
+                    <h3 class="category-title">Creativity</h3>
+                    <p class="category-description">Insights into artistic expression, innovation, and unleashing your creative potential.</p>
+                    <div class="category-meta">
+                        <span class="article-count">35 Articles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="health">
+                <img src="/api/placeholder/400/320" alt="Health" class="category-image">
+                <div class="category-content">
+                    <h3 class="category-title">Health</h3>
+                    <p class="category-description">Wellness tips, mental health strategies, fitness advice, and holistic living.</p>
+                    <div class="category-meta">
+                        <span class="article-count">29 Articles</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="finance">
+                <img src="/api/placeholder/400/320" alt="Finance" class="category-image">
+                <div class="category-content">
+                    <h3 class="category-title">Finance</h3>
+                    <p class="category-description">Personal finance, investment strategies, economic insights, and financial planning.</p>
+                    <div class="category-meta">
+                        <span class="article-count">33 Articles</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('categorySearch');
+            const categoriesGrid = document.getElementById('categoriesGrid');
+            const categoryCards = categoriesGrid.querySelectorAll('.category-card');
+
+            // Initially show all cards
+            categoryCards.forEach(card => {
+                card.style.display = 'block';
+            });
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+
+                categoryCards.forEach(card => {
+                    const categoryName = card.getAttribute('data-category').toLowerCase();
+                    const categoryTitle = card.querySelector('.category-title').textContent.toLowerCase();
+                    const categoryDescription = card.querySelector('.category-description').textContent.toLowerCase();
+
+                    if (
+                        categoryName.includes(searchTerm) || 
+                        categoryTitle.includes(searchTerm) || 
+                        categoryDescription.includes(searchTerm)
+                    ) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
